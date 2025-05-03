@@ -29,8 +29,6 @@ do------------------------------------------------------------------------------
     local shakingBushes = API.GetAllObjArray1({26808}, 30, {0})
     
     if #shakingBushes > 0 and API.InvItemFound1(19805) then
-        local fireBushes = API.GetAllObjArray1({3952}, 30, {4})
-        
         for i = 1, #shakingBushes do
             if (API.Mem_Read_int(shakingBushes[i].Mem + 0x2F4) ~= 0) and not isOnFire(shakingBushes[i]) then
                 API.DoAction_Object2(0x2a,API.OFF_ACT_GeneralObject_route0,{ shakingBushes[i].Id },50,WPOINT.new(shakingBushes[i].TileX / 512,shakingBushes[i].TileY / 512,0))
