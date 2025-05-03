@@ -11,7 +11,7 @@ local function isOnFire(bush)
     return false
 end
 
-API.SetMaxIdleTime(5)
+API.SetMaxIdleTime(10)
 API.SetDrawTrackedSkills(true)
 API.Write_LoopyLoop(true)
 while(API.Read_LoopyLoop() and API.PlayerLoggedIn())
