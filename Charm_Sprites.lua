@@ -30,12 +30,20 @@ do------------------------------------------------------------------------------
     
     if #shakingBushes > 0 and API.InvItemFound1(19805) then
         local fireBushes = API.GetAllObjArray1({3952}, 30, {4})
+
+        local validBushes = {}
         for i = 1, #shakingBushes do
             if (API.Mem_Read_int(shakingBushes[i].Mem + 0x2F4) ~= 0) and not isOnFire(shakingBushes[i]) then
-                API.DoAction_Object2(0x2a,API.OFF_ACT_GeneralObject_route0,{ shakingBushes[i].Id },50,WPOINT.new(shakingBushes[i].TileX / 512,shakingBushes[i].TileY / 512,0))
-                API.RandomSleep2(600, 100, 200)
-                break
+                table.insert(validBushes, shakingBushes[i])
             end
+        end
+
+        if #validBushes > 0 then
+            local randomIndex = math.random(1, #validBushes)
+            local chosenBush = validBushes[randomIndex]
+    
+            API.DoAction_Object2(0x2a,API.OFF_ACT_GeneralObject_route0,{ chosenBush.Id },50,WPOINT.new(chosenBush.TileX / 512,chosenBush.TileY / 512,0))
+            API.RandomSleep2(600, 100, 200)
         end
     end
 
